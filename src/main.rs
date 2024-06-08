@@ -19,6 +19,20 @@ fn main() {
 
     //静态分派：在编译时确定具体实现，编译器可以进行优化，适用于库中以提高性能。
     //动态分派：在运行时确定具体实现，通过 vtable 查找方法，适用于二进制中以提高编译速度和代码简洁性，但以性能为代价。
+
+    let a: &str = "Rust";
+
+    // 分别打印出切片长度、切片变量地址、切片对应值的地址
+
+    // 和切片对应值的大小，它和切片中的len属性大小一致
+
+    println!(
+        "size of a:{} , address of a:{:p}, value address of a:{:p} , size of data:{}",
+        a.len(),
+        &a,
+        &(*a),
+        size_of_val(&(*a))
+    );
 }
 
 //  AsRef<T> trait
