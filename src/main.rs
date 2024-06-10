@@ -1,5 +1,5 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc, sync::Arc};
-
+mod smartponiter;
 fn main() {
     println!("Hello, world!");
 
@@ -55,6 +55,24 @@ fn main() {
     }
 
     println!("strong count :{}", Rc::strong_count(&shared_map));
+
+    let q = 5;
+    let w = q;
+    let e = w;
+
+    println!("{},{},{}", q, w, e);
+
+    // 闭包中的生命周期
+    // 编译错误
+    //let closure = |x:&i32|->&i32{x};
+    // 使用Fn
+    fn fn_closure<T, F: Fn(&T) -> &T>(f: F) -> F {
+        f
+    }
+
+    let closure = fn_closure(|x: &i32| -> &i32 { x });
+
+    println!("fn result:{}", closure(&32));
 }
 
 //  AsRef<T> trait
