@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{cell::RefCell, collections::HashMap, rc::Rc, sync::Arc};
 
 fn main() {
     println!("Hello, world!");
@@ -26,13 +26,35 @@ fn main() {
 
     // 和切片对应值的大小，它和切片中的len属性大小一致
 
-    println!(
-        "size of a:{} , address of a:{:p}, value address of a:{:p} , size of data:{}",
-        a.len(),
-        &a,
-        &(*a),
-        size_of_val(&(*a))
-    );
+    // println!(
+    //     "size of a:{} , address of a:{:p}, value address of a:{:p} , size of data:{}",
+    //     a.len(),
+    //     &a,
+    //     &(*a),
+    //     size_of_val(&(*a))
+    // );
+
+    let shared_map: Rc<RefCell<HashMap<&str, i32>>> = Rc::new(RefCell::new(HashMap::new()));
+
+    println!("strong count :{}", Rc::strong_count(&shared_map));
+
+    {
+        let shared_map2 = shared_map.clone();
+
+        println!("strong count :{}", Rc::strong_count(&shared_map));
+
+        let mut map = shared_map.borrow_mut();
+
+        map.insert("lucky", 1);
+
+        map.insert("regan", 2);
+
+        map.insert("lily", 3);
+
+        map.insert("pop", 4);
+    }
+
+    println!("strong count :{}", Rc::strong_count(&shared_map));
 }
 
 //  AsRef<T> trait
