@@ -1,5 +1,6 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc, sync::Arc};
 mod smartponiter;
+mod vec;
 fn main() {
     println!("Hello, world!");
 
