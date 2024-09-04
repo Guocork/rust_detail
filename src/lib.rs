@@ -27,7 +27,7 @@
 // }
 
 use std::cell::RefCell;
-
+mod bit_model;
 #[derive(Debug)]
 struct Animal {
     age: u8,
