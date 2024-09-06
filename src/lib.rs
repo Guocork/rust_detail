@@ -28,6 +28,7 @@
 
 use std::cell::RefCell;
 mod bit_model;
+mod endianness;
 #[derive(Debug)]
 struct Animal {
     age: u8,
